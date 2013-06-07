@@ -75,6 +75,9 @@
 #define CONF_DESPOTIFY_USER             "despotify_user"
 #define CONF_DESPOTIFY_PASSWORD         "despotify_password"
 #define CONF_DESPOTIFY_HIGH_BITRATE     "despotify_high_bitrate"
+#define CONF_ON_PLAY_CMD                "on_play"
+#define CONF_ON_STOP_CMD                "on_stop"
+#define CONF_ON_PAUSE_CMD               "on_pause"
 
 #define DEFAULT_PLAYLIST_MAX_LENGTH (1024*16)
 #define DEFAULT_PLAYLIST_SAVE_ABSOLUTE_PATHS false

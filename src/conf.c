@@ -101,6 +101,9 @@ static struct config_entry config_entries[] = {
 	{ .name = CONF_DESPOTIFY_USER, false, false },
 	{ .name = CONF_DESPOTIFY_PASSWORD, false, false},
 	{ .name = CONF_DESPOTIFY_HIGH_BITRATE, false, false },
+    { .name = CONF_ON_PLAY_CMD, false, false },
+    { .name = CONF_ON_STOP_CMD, false, false },
+    { .name = CONF_ON_PAUSE_CMD, false, false },    
 	{ .name = "filter", true, true },
 };
 

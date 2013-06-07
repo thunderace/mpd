@@ -18,6 +18,7 @@
  */
 
 #include "config.h"
+#include "conf.h"
 #include "player_control.h"
 #include "decoder_control.h"
 #include "path.h"
@@ -28,6 +29,7 @@
 #include "pcm_volume.h"
 #include "main.h"
 
+#include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
 #include <math.h>
@@ -98,6 +100,24 @@ player_command_locked(struct player_control *pc, enum player_command cmd)
 	assert(pc->command == PLAYER_COMMAND_NONE);
 
 	pc->command = cmd;
+    const char *on_action_cmd = NULL;
+    switch (cmd) {
+        case PLAYER_COMMAND_STOP:
+            if (pc->state == PLAYER_STATE_STOP)
+                on_action_cmd = config_get_string(CONF_ON_PLAY_CMD, NULL);
+            else
+                on_action_cmd = config_get_string(CONF_ON_STOP_CMD, NULL);
+            break;
+        case PLAYER_COMMAND_PAUSE:
+            on_action_cmd = config_get_string(CONF_ON_PAUSE_CMD, NULL);
+            break;
+        default:
+            break;
+    }
+    if (on_action_cmd != NULL) {
+        system(on_action_cmd);
+    }
+    
 	player_signal(pc);
 	player_command_wait_locked(pc);
 }
