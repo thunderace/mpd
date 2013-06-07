@@ -1174,12 +1174,15 @@ handle_setvol(struct client *client, G_GNUC_UNUSED int argc, char *argv[])
 
 	if (!check_unsigned(client, &level, argv[1]))
 		return COMMAND_RETURN_ERROR;
-
+    if (level > 100) {
+        level = 100;
+    }
+/*
 	if (level > 100) {
 		command_error(client, ACK_ERROR_ARG, "Invalid volume value");
 		return COMMAND_RETURN_ERROR;
 	}
-
+*/
 	success = volume_level_change(level);
 	if (!success) {
 		command_error(client, ACK_ERROR_SYSTEM,
