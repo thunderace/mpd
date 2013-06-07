@@ -145,6 +145,24 @@
 #
 ###############################################################################
 
+# User action on command #####################################################
+#
+# This settings specifies the command to execute when MPD receive a 'play'  
+# command 
+#
+#on_play "php /home/mpd/on_play.php"
+#
+# This settings specifies the command to execute when MPD receive a 'stop'  
+# command 
+#
+#on_stop "php /home/mpd/on_stop.php"
+#
+# This settings specifies the command to execute when MPD receive a 'pause'  
+# command 
+#
+#on_pause "php /home/mpd/on_pause.php"
+#
+###############################################################################
 
 # Zeroconf / Avahi Service Discovery ##########################################
 #

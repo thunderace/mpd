@@ -124,6 +124,15 @@ using a password.  The format of permissions is specified in the description of
 the "password" config parameter.  If no passwords are specified, the default is
 "read,add,control,admin", otherwise it is "" (no permissions).
 .TP
+.B on_play <script>
+This specifies the command to execute when MPD receive a 'play' command
+.TP
+.B on_stop <script>
+This specifies the command to execute when MPD receive a 'stop' command
+.TP
+.B on_pause <script>
+This specifies the command to execute when MPD receive a 'pause' command
+.TP
 .B audio_output
 See \fBDESCRIPTION\fP and the various \fBAUDIO OUTPUT PARAMETERS\fP sections
 for the format of this parameter.  Multiple audio_output sections may be
