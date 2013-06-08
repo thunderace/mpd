@@ -45,6 +45,7 @@
 #define CONF_AUDIO_FILTER               "filter"
 #define CONF_AUDIO_OUTPUT_FORMAT        "audio_output_format"
 #define CONF_MIXER_TYPE                 "mixer_type"
+#define CONF_RESTORE_PAUSED		"restore_paused"
 #define CONF_REPLAYGAIN                 "replaygain"
 #define CONF_REPLAYGAIN_PREAMP          "replaygain_preamp"
 #define CONF_REPLAYGAIN_MISSING_PREAMP  "replaygain_missing_preamp"
