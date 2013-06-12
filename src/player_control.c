@@ -100,24 +100,6 @@ player_command_locked(struct player_control *pc, enum player_command cmd)
 	assert(pc->command == PLAYER_COMMAND_NONE);
 
 	pc->command = cmd;
-    const char *on_action_cmd = NULL;
-    switch (cmd) {
-        case PLAYER_COMMAND_STOP:
-            if (pc->state == PLAYER_STATE_STOP)
-                on_action_cmd = config_get_string(CONF_ON_PLAY_CMD, NULL);
-            else
-                on_action_cmd = config_get_string(CONF_ON_STOP_CMD, NULL);
-            break;
-        case PLAYER_COMMAND_PAUSE:
-            on_action_cmd = config_get_string(CONF_ON_PAUSE_CMD, NULL);
-            break;
-        default:
-            break;
-    }
-    if (on_action_cmd != NULL) {
-        system(on_action_cmd);
-    }
-    
 	player_signal(pc);
 	player_command_wait_locked(pc);
 }
@@ -136,6 +118,11 @@ pc_play(struct player_control *pc, struct song *song)
 	assert(song != NULL);
 
 	player_lock(pc);
+	
+    const char *on_play_cmd = config_get_string(CONF_ON_PLAY_CMD, NULL);
+
+    if (on_play_cmd != NULL)
+		system(on_play_cmd);    
 
 	if (pc->state != PLAYER_STATE_STOP)
 		player_command_locked(pc, PLAYER_COMMAND_STOP);
@@ -152,15 +139,23 @@ pc_play(struct player_control *pc, struct song *song)
 void
 pc_cancel(struct player_control *pc)
 {
+    const char *on_stop_cmd = config_get_string(CONF_ON_STOP_CMD, NULL);
 	player_command(pc, PLAYER_COMMAND_CANCEL);
 	assert(pc->next_song == NULL);
+    if (on_stop_cmd != NULL)
+    	system(on_stop_cmd);
 }
 
 void
 pc_stop(struct player_control *pc)
 {
+    const char *on_stop_cmd = config_get_string(CONF_ON_STOP_CMD, NULL);
+
 	player_command(pc, PLAYER_COMMAND_CLOSE_AUDIO);
 	assert(pc->next_song == NULL);
+
+    if (on_stop_cmd != NULL)
+		system(on_stop_cmd);
 
 	idle_add(IDLE_PLAYER);
 }
@@ -200,6 +195,9 @@ static void
 pc_pause_locked(struct player_control *pc)
 {
 	if (pc->state != PLAYER_STATE_STOP) {
+    	const char *on_pause_cmd = config_get_string(CONF_ON_PAUSE_CMD, NULL);
+    	if (on_pause_cmd != NULL)
+			system(on_pause_cmd);
 		player_command_locked(pc, PLAYER_COMMAND_PAUSE);
 		idle_add(IDLE_PLAYER);
 	}
