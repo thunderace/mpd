@@ -387,7 +387,7 @@ alsa_mixer_get_volume(struct mixer *mixer, GError **error_r)
 				   (am->volume_max - am->volume_min)) + 0.5);
 	}
 
-    g_warning("alsa_mixer_get_volume : '%d'", ret);
+//      g_warning("alsa_mixer_get_volume : '%d'", ret);
 	return ret;
 }
 
@@ -402,18 +402,18 @@ alsa_mixer_set_volume(struct mixer *mixer, unsigned volume, GError **error_r)
 	assert(am->handle != NULL);
 
 	vol = volume;
-    g_warning("alsa_mixer_set_volume (volume): '%d'", volume);
+//      g_warning("alsa_mixer_set_volume (volume): '%d'", volume);
     
 	am->volume_set = vol + 0.5;
 
 	level = (long)(((vol / 100.0) * (am->volume_max - am->volume_min) +
 			am->volume_min) + 0.5);
-    g_warning("alsa_mixer_set_volume (max volume): '%d'", am->volume_max);
-    g_warning("alsa_mixer_set_volume (level1): '%d'", level);
+//      g_warning("alsa_mixer_set_volume (max volume): '%d'", am->volume_max);
+//      g_warning("alsa_mixer_set_volume (level1): '%d'", level);
 	level = level > am->volume_max ? am->volume_max : level;
-    g_warning("alsa_mixer_set_volume (level2): '%d'", level);
+//      g_warning("alsa_mixer_set_volume (level2): '%d'", level);
 	level = level < am->volume_min ? am->volume_min : level;
-    g_warning("alsa_mixer_set_volume (level3): '%d'", level);
+//      g_warning("alsa_mixer_set_volume (level3): '%d'", level);
 
 	err = snd_mixer_selem_set_playback_volume_all(am->elem, level);
 	if (err < 0) {
