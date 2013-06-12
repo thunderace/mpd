@@ -40,7 +40,7 @@ struct alsa_mixer_source {
 
 struct alsa_mixer {
 	/** the base mixer class */
-	struct mixer base;
+	struct mixer base; 
 
 	const char *device;
 	const char *control;
