@@ -184,6 +184,9 @@ pc_pause(struct player_control *pc)
 	player_lock(pc);
 
 	if (pc->state != PLAYER_STATE_STOP) {
+        const char *on_pause_cmd = config_get_string(CONF_ON_PAUSE_CMD, NULL);
+    	if (on_pause_cmd != NULL)
+			system(on_pause_cmd);
 		player_command_locked(pc, PLAYER_COMMAND_PAUSE);
 		idle_add(IDLE_PLAYER);
 	}
